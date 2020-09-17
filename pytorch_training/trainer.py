@@ -42,15 +42,17 @@ class Trainer:
 
     @property
     def num_epochs(self) -> int:
+        num_remaining_epochs = self.stop_trigger.period - self.updater.current_epoch
         if self.stop_trigger.unit == 'epoch':
-            return self.stop_trigger.period
+            return num_remaining_epochs
         else:
-            return max(math.ceil(self.stop_trigger.period / self.updater.epoch_length), 1)
+            return max(math.ceil(num_remaining_epochs / self.updater.epoch_length), 1)
 
     @property
     def iterations_per_epoch(self) -> int:
+        num_iterations_in_epoch = self.updater.epoch_length - self.updater.iteration_in_epoch
         if self.stop_trigger.unit == 'epoch':
-            return self.updater.epoch_length
+            return num_iterations_in_epoch
         else:
             return min(self.stop_trigger.period - self.updater.iteration, self.updater.epoch_length)
 

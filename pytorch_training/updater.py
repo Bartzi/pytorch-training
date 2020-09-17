@@ -27,8 +27,15 @@ class Updater:
 
     @property
     def epoch_detail(self) -> float:
-        current_epoch = self.iteration // self.epoch_length
-        return current_epoch + (self.iteration % self.epoch_length) / self.epoch_length
+        return self.current_epoch + self.iteration_in_epoch / self.epoch_length
+
+    @property
+    def current_epoch(self):
+        return self.iteration // self.epoch_length
+
+    @property
+    def iteration_in_epoch(self):
+        return self.iteration % self.epoch_length
 
     def update(self):
         self.update_core()
