@@ -1,0 +1,9 @@
+tqdm
+pytest
+Pillow
+torch
+torchvision
+tensorboard
+wandb
+numpy
+filelock
