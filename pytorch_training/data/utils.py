@@ -13,7 +13,7 @@ Image.init()
 
 _dataset_root = Path(os.environ.get(
     'PYTORCH_TRAINING_DATASET_ROOT',
-    os.path.join(os.path.expanduser('~'), '.pytirch_training', 'datasets')))
+    os.path.join(os.path.expanduser('~'), '.pytorch_training', 'datasets')))
 
 
 def default_loader(path):
