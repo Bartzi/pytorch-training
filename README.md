@@ -1,6 +1,6 @@
 # pytorch-training
 
-Repository to keep pytorch training scripts.
+Training Helpers for PyTorch that allow writing Object Oriented Training Loops
 
 # Installation
 
