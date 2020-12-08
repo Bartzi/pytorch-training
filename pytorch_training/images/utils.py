@@ -11,8 +11,10 @@ from pytorch_training.data import Compose
 Image.init()
 
 
-def is_image(file_name: str) -> bool:
-    return Path(file_name).suffix.lower() in Image.EXTENSION.keys()
+def is_image(file_name: Union[str, Path]) -> bool:
+    if not isinstance(file_name, Path):
+         file_name = Path(file_name)
+    return file_name.suffix.lower() in Image.EXTENSION.keys()
 
 
 def load_and_prepare_image(file_name: Union[str, Path], transforms: Compose, add_batch_dim=True) -> torch.Tensor:
