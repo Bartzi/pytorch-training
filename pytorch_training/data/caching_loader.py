@@ -28,8 +28,8 @@ class CachingLoader:
         if not isinstance(path, Path):
             path = Path(path)
 
-        cache_key = path.relative_to(self.load_root)
-        local_image_path = self.cache.get(str(cache_key), None)
+        cache_key = str(path.relative_to(self.load_root))
+        local_image_path = self.cache.get(cache_key, None)
 
         if local_image_path is not None:
             # we have the image already in our cache, so no need to draw it from the remote anymore
@@ -40,4 +40,5 @@ class CachingLoader:
         cache_path = self.cache_root / cache_key
         cache_path.parent.mkdir(parents=True, exist_ok=True)
         image.save(cache_path)
+        self.cache[cache_key] = str(cache_path)
         return image
