@@ -14,7 +14,7 @@ from pytorch_training.trainer import Trainer
 
 class Evaluator(Extension):
 
-    def __init__(self, data_loader: DataLoader, logger: Logger, eval_func: Callable[..., None], device: Union[int, str], *args, **kwargs):
+    def __init__(self, data_loader: DataLoader, logger: Logger, eval_func: Callable, device: Union[int, str], *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.data_loader = data_loader
         self.logger = logger
