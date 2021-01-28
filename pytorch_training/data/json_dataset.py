@@ -7,6 +7,7 @@ from torch.utils import data
 from typing import Dict
 
 from pytorch_training.data.utils import default_loader, is_image_file
+from pytorch_training.images import is_image
 
 
 class JSONDataset(data.Dataset):
@@ -14,7 +15,7 @@ class JSONDataset(data.Dataset):
     def __init__(self, json_file: str, root: str = None, transforms: Callable = None, loader: Callable = default_loader):
         with open(json_file) as f:
             self.image_data = json.load(f)
-            self.image_data = [file_path for file_path in self.image_data if is_image_file(file_path)]
+            self.image_data = [file_path for file_path in self.image_data if is_image(file_path)]
 
         self.root = root
         self.transforms = transforms
