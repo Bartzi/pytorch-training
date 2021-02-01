@@ -41,6 +41,10 @@ class Trainer:
         return trange(start, end, step, **kwargs)
 
     @property
+    def num_iterations(self) -> int:
+        return self.num_epochs * self.iterations_per_epoch
+
+    @property
     def num_epochs(self) -> int:
         num_remaining_epochs = self.stop_trigger.period - self.updater.current_epoch
         if self.stop_trigger.unit == 'epoch':
