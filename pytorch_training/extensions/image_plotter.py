@@ -31,6 +31,7 @@ class ImagePlotter(Extension):
         return predictions
 
     def run(self, trainer: Trainer):
+        torch.cuda.empty_cache()
         try:
             for network in self.networks:
                 network.eval()
