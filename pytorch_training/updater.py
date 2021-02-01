@@ -30,11 +30,11 @@ class Updater:
         return self.current_epoch + self.iteration_in_epoch / self.epoch_length
 
     @property
-    def current_epoch(self):
+    def current_epoch(self) -> int:
         return self.iteration // self.epoch_length
 
     @property
-    def iteration_in_epoch(self):
+    def iteration_in_epoch(self) -> int:
         return self.iteration % self.epoch_length
 
     def update(self):
