@@ -1,5 +1,5 @@
 from torch import distributed
-
+from torch.nn.parallel import DistributedDataParallel as DDP
 
 def get_rank():
     if not distributed.is_available():
@@ -34,3 +34,7 @@ def get_world_size():
         return 1
 
     return distributed.get_world_size()
+
+
+def strip_parallel_module(module):
+    return module if not isinstance(module, DDP) else module.module
