@@ -6,7 +6,7 @@ from pathlib import Path
 import filelock as filelock
 import shutil
 from PIL import Image
-from typing import Callable, Any
+from typing import Callable, Any, Union
 
 Image.init()
 
@@ -16,11 +16,11 @@ _dataset_root = Path(os.environ.get(
     os.path.join(os.path.expanduser('~'), '.pytorch_training', 'datasets')))
 
 
-def default_loader(path):
-    return Image.open(path).convert('RGB')
+def default_loader(path: Union[str, Path]) -> Image:
+    return Image.open(str(path)).convert('RGB')
 
 
-def is_image_file(file_name):
+def is_image_file(file_name: Path) -> bool:
     msg = ("pytorch_training.data.utils.is_image_file should be replaced by "
            "pytorch_training.images.utils.is_image.")
     warnings.warn(msg, DeprecationWarning)
