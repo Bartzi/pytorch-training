@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from typing import Callable, Union
 
 import torch
@@ -66,3 +67,10 @@ class Evaluator(Extension):
                 self.eval_func(batch)
 
         torch.cuda.empty_cache()
+
+
+@contextmanager
+def eval_mode(network: torch.nn.Module):
+    network.eval()
+    yield
+    network.train()
