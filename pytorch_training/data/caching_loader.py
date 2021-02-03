@@ -14,7 +14,7 @@ class CachingLoader:
     def __init__(self, load_root: Union[str, Path], cache_root: Path = DEFAULT_CACHE_ROOT, base_loader: Callable = default_loader):
         self.load_root = load_root
         self.base_loader = base_loader
-        self.cache_root = cache_root
+        self.cache_root = Path(cache_root)
         self.cache_root.mkdir(parents=True, exist_ok=True)
         self.cache: Dict[str, str] = {}
         self.build_cache()
