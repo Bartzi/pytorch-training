@@ -157,12 +157,12 @@ class WandBLogger(Logger):
     def log_histogram_impl(self, key, histogram, iteration):
         self.wandb_handle.log({key: histogram}, step=iteration)
 
-    def __init__(self, *args, run_name=None, project_name=None,  **kwargs):
+    def __init__(self, *args, run_name=None, project_name=None, entity=None, **kwargs):
         kwargs['exclusion_filters'] = (r'*logs*', r'*wandb')
         if kwargs.get('master', True):
             assert run_name is not None, "You must supply a name for the current run"
             assert project_name is not None, "You must supply a name for the project that is to be logged on WandB"
-            self.wandb_handle = wandb.init(name=run_name, project=project_name, force=True)
+            self.wandb_handle = wandb.init(name=run_name, project=project_name, entity=entity, force=True)
         super().__init__(*args, **kwargs)
 
     def log_args(self, args, file_name):
