@@ -3,6 +3,8 @@ from typing import Iterable
 from torch import nn
 from torch.optim.optimizer import Optimizer
 
+from pytorch_training.distributed import get_world_size
+
 
 class Updater:
 
@@ -42,6 +44,11 @@ class Updater:
         self.iteration += 1
 
     def reset(self):
+        if get_world_size() > 1:
+            for data_loader in self.data_loaders.values():
+                if hasattr(data_loader, "sampler"):
+                    data_loader.sampler.set_epoch(self.current_epoch)
+
         self.iterators = {key: iter(data_loader) for key, data_loader in self.data_loaders.items()}
 
     def update_core(self):
